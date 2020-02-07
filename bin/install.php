@@ -88,15 +88,6 @@ class Installer
                 'msg'   => 'See https://github.com/kenjis/codeigniter3-filename-checker',
                 'example_branch' => 'master',
             ),
-            'blade-engine' => array(
-                'site'  => 'github',
-                'user'  => 'xiaoler',
-                'repos' => 'blade',
-                'name'  => 'CodeIgniter Blade Engine',
-                'dir'   => array('config','core', 'third_party','controllers'),
-                'msg'   => 'See https://github.com/relightings/CodeIgniter-develbar',
-                'example_branch' => 'master',
-            ),
             'codeigniter-develbar' => array(
                 'site'  => 'github',
                 'user'  => 'relightings',
@@ -104,6 +95,15 @@ class Installer
                 'name'  => 'CodeIgniter Developer Toolbar',
                 'dir'   => array('config','core', 'third_party','controllers'),
                 'msg'   => 'See https://github.com/relightings/CodeIgniter-develbar',
+                'example_branch' => 'master',
+            ),
+            'codeigniter-blade-engine' => array(
+                'site'  => 'github',
+                'user'  => 'relightings',
+                'repos' => 'codeigniter-blade-engine',
+                'name'  => 'Codeigniter Blade Engine',
+                'dir'   => 'libraries',
+                'msg'   => 'See https://github.com/relightings/codeigniter-blade-engine',
                 'example_branch' => 'master',
             ),
         );

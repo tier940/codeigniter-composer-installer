@@ -101,6 +101,11 @@ $ php bin/install.php restserver 2.7.2
 ```
 $ php bin/install.php codeigniter-develbar master
 ```
+[Codeigniter Blade Engine](https://github.com/relightings/codeigniter-blade-engine):
+
+```
+$ php bin/install.php codeigniter-blade-engine master
+```
 
 ### Run PHP built-in server (PHP 5.4 or later)
 
