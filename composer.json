@@ -1,21 +1,25 @@
 {
-    "name": "kenjis/codeigniter-composer-installer",
+    "name": "relightings/codeigniter-composer-installer",
     "description": "Package to install CodeIgniter3 via Composer with secure folder structure.",
     "keywords": [
         "CodeIgniter",
         "Composer",
         "installer"
     ],
-    "homepage": "https://github.com/kenjis/codeigniter-composer-installer",
+    "homepage": "https://github.com/relightings/codeigniter-composer-installer",
     "license": "MIT",
     "authors": [
         {
             "name": "Kenji Suzuki",
             "email": "kenji.uui@gmail.com"
+        },
+        {
+            "name": "ReLightings",
+            "email": "service@relightings.com"
         }
     ],
     "require": {
-            "codeigniter/framework": "3.1.*"
+        "codeigniter/framework": "3.1.*"
     },
     "autoload": {
         "psr-4": {
@@ -38,5 +42,11 @@
         "kenjis/codeigniter-ss-twig": "A Simple and Secure Twig integration for CodeIgniter 3.0",
         "kenjis/codeigniter-doctrine": "A simple Doctrine integration for CodeIgniter 3.0",
         "kenjis/codeigniter-deployer": "A Deployment Tool for CodeIgniter 3.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "process-timeout": 0
     }
 }
