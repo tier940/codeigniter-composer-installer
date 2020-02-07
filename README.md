@@ -1,12 +1,8 @@
 # CodeIgniter Composer Installer
 
-[![Latest Stable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/stable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Total Downloads](https://poser.pugx.org/kenjis/codeigniter-composer-installer/downloads)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![Latest Unstable Version](https://poser.pugx.org/kenjis/codeigniter-composer-installer/v/unstable)](https://packagist.org/packages/kenjis/codeigniter-composer-installer) [![License](https://poser.pugx.org/kenjis/codeigniter-composer-installer/license)](https://packagist.org/packages/kenjis/codeigniter-composer-installer)
-
 This package installs the offical [CodeIgniter](https://github.com/bcit-ci/CodeIgniter) (version `3.1.*`) with secure folder structure via Composer.
 
-**Note:** If you want to install CodeIgniter4 (under development), see <https://github.com/kenjis/codeigniter-composer-installer/tree/4.x>.
-
-You can update CodeIgniter system folder to latest version with one command.
+**Note:** This repository is fork. The author's repository is here. <https://github.com/kenjis/codeigniter-composer-installer/>.
 
 ## Folder Structure
 
@@ -35,7 +31,7 @@ codeigniter/
 ### Install CodeIgniter
 
 ```
-$ composer create-project kenjis/codeigniter-composer-installer codeigniter
+$ composer install
 ```
 
 Above command installs `public/.htaccess` to remove `index.php` in your URL. If you don't need it, please remove it.
