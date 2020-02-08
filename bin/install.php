@@ -12,23 +12,22 @@ if ($argc === 3) {
 }
 
 
-class Installer
-{
+class Installer {
     protected $tmp_dir;
     protected $packages = array();
 
     public function __construct() {
         $this->tmp_dir = __DIR__ . '/tmp';
         @mkdir($this->tmp_dir);
-        
+
         $this->packages = array(
             'translations' => array(
                 'site'  => 'github',
                 'user'  => 'bcit-ci',
                 'repos' => 'codeigniter3-translations',
                 'name'  => 'Translations for CodeIgniter System Messages',
-                'dir'   => 'language',
-                'example_branch' => '3.1.0',
+                'dir'   => array('core','language'),
+                'example_branch' => '3.1.11',
              ),
             'restserver' => array(
                 'site'  => 'github',
@@ -38,7 +37,7 @@ class Installer
                 'dir'   => array('config', 'controllers', 'language', 'libraries', 'views'),
                 'pre'   => 'application/',
                 'msg'   => 'See https://github.com/chriskacerguis/codeigniter-restserver',
-                'example_branch' => '2.7.2',
+                'example_branch' => '3.0.4',
             ),
             'matches-cli' => array(
                 'site'  => 'github',
@@ -77,7 +76,7 @@ class Installer
                     'migrations', 'models', 'sql', 'views'
                 ),
                 'msg'   => 'See http://benedmunds.com/ion_auth/',
-                'example_branch' => '2',
+                'example_branch' => '3',
             ),
             'filename-checker' => array(
                 'site'  => 'github',
@@ -109,14 +108,13 @@ class Installer
         );
     }
 
-    public function usage($self)
-    {
+    public function usage($self) {
         $msg = 'You can install:' . PHP_EOL;
-        
+
         foreach ($this->packages as $key => $value) {
             $msg .= '  ' . $value['name'] . ' (' . $key . ')' . PHP_EOL;
         }
-        
+
         $msg .= PHP_EOL;
         $msg .= 'Usage:' . PHP_EOL;
         $msg .= '  php install.php <package> <version/branch>'  . PHP_EOL;
@@ -130,8 +128,7 @@ class Installer
         return $msg;
     }
 
-    public function install($package, $version)
-    {
+    public function install($package, $version) {
         if (! isset($this->packages[$package]))
         {
             return 'Error! no such package: ' . $package . PHP_EOL;
@@ -147,7 +144,7 @@ class Installer
                 'Error! no such repos type: ' . $this->packages[$package]['site']
             );
         }
-        
+
         list($src, $dst) = $this->$method($package, $version);
 
         $this->recursiveCopy($src, $dst);
@@ -160,8 +157,7 @@ class Installer
         return $msg;
     }
 
-    private function downloadFromGithub($package, $version)
-    {
+    private function downloadFromGithub($package, $version) {
         $user = $this->packages[$package]['user'];
         $repos = $this->packages[$package]['repos'];
         $url = "https://github.com/$user/$repos/archive/$version.zip";
@@ -170,13 +166,13 @@ class Installer
 
         $dir = $this->packages[$package]['dir'];
         $pre = isset($this->packages[$package]['pre']) ? $this->packages[$package]['pre'] : '';
-        
+
         if (is_string($dir)) {
             $src = realpath(dirname($filepath) . "/$repos-$version/$pre$dir");
             $dst = realpath(__DIR__ . "/../application/$dir");
             return array($src, $dst);
         }
-        
+
         foreach ($dir as $directory) {
             $src[] = realpath(dirname($filepath) . "/$repos-$version/$pre$directory");
             @mkdir(__DIR__ . "/../application/$directory");
@@ -185,8 +181,7 @@ class Installer
         return array($src, $dst);
     }
 
-    private function downloadFromBitbucket($package, $version)
-    {
+    private function downloadFromBitbucket($package, $version) {
         $user = $this->packages[$package]['user'];
         $repos = $this->packages[$package]['repos'];
         // https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc/get/codeigniter-3.x.zip
@@ -195,13 +190,13 @@ class Installer
         $dirname = $this->unzip($filepath);
 
         $dir = $this->packages[$package]['dir'];
-        
+
         if (is_string($dir)) {
             $src = realpath(dirname($filepath) . "/$dirname/$dir");
             $dst = realpath(__DIR__ . "/../application/$dir");
             return array($src, $dst);
         }
-        
+
         foreach ($dir as $directory) {
             $src[] = realpath(dirname($filepath) . "/$dirname/$directory");
             @mkdir(__DIR__ . "/../application/$directory");
@@ -210,23 +205,21 @@ class Installer
         return array($src, $dst);
     }
 
-    private function download($url)
-    {
+    private function download($url) {
         $file = file_get_contents($url);
         if ($file === false) {
             throw new RuntimeException("Can't download: $url");
         }
         echo 'Downloaded: ' . $url . PHP_EOL;
-        
+
         $urls = parse_url($url);
         $filepath = $this->tmp_dir . '/' . basename($urls['path']);
         file_put_contents($filepath, $file);
-        
+
         return $filepath;
     }
 
-    private function unzip($filepath)
-    {
+    private function unzip($filepath) {
         $zip = new ZipArchive();
         if ($zip->open($filepath) === TRUE) {
             $tmp = explode('/', $zip->getNameIndex(0));
@@ -236,7 +229,7 @@ class Installer
         } else {
             throw new RuntimeException('Failed to unzip: ' . $filepath);
         }
-        
+
         return $dirname;
     }
 
@@ -246,8 +239,7 @@ class Installer
      * @param string $src
      * @param string $dst
      */
-    private function recursiveCopy($src, $dst)
-    {
+    private function recursiveCopy($src, $dst) {
         if ($src === false) {
             return;
         }
@@ -256,17 +248,17 @@ class Installer
             foreach ($src as $key => $source) {
                 $this->recursiveCopy($source, $dst[$key]);
             }
-            
+
             return;
         }
 
         @mkdir($dst, 0755);
-        
+
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($src, \RecursiveDirectoryIterator::SKIP_DOTS),
             \RecursiveIteratorIterator::SELF_FIRST
         );
-        
+
         foreach ($iterator as $file) {
             if ($file->isDir()) {
                 @mkdir($dst . '/' . $iterator->getSubPathName());
@@ -284,13 +276,12 @@ class Installer
      *
      * @param string $dir
      */
-    private function recursiveUnlink($dir)
-    {
+    private function recursiveUnlink($dir) {
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS),
             \RecursiveIteratorIterator::CHILD_FIRST
         );
-        
+
         foreach ($iterator as $file) {
             if ($file->isDir()) {
                 rmdir($file);
@@ -298,7 +289,7 @@ class Installer
                 unlink($file);
             }
         }
-        
+
         rmdir($dir);
     }
 }

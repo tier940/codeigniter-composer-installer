@@ -56,7 +56,7 @@ If you want to install translations for system messages:
 
 ```
 $ cd /path/to/codeigniter
-$ php bin/install.php translations 3.1.0
+$ php bin/install.php translations 3.1.11
 ```
 
 #### Install Third Party Libraries
@@ -82,7 +82,7 @@ $ php bin/install.php modular-extensions-hmvc codeigniter-3.x
 [Ion Auth](https://github.com/benedmunds/CodeIgniter-Ion-Auth):
 
 ```
-$ php bin/install.php ion-auth 2
+$ php bin/install.php ion-auth 3
 ```
 
 [CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker):
@@ -94,7 +94,7 @@ $ php bin/install.php filename-checker master
 [CodeIgniter Rest Server](https://github.com/chriskacerguis/codeigniter-restserver):
 
 ```
-$ php bin/install.php restserver 2.7.2
+$ php bin/install.php restserver 3.0.4
 ```
 [CodeIgniter Developer Toolbar](https://github.com/relightings/CodeIgniter-develbar):
 
