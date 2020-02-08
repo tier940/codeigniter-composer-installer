@@ -90,10 +90,10 @@ class Installer {
             'codeigniter-develbar' => array(
                 'site'  => 'github',
                 'user'  => 'relightings',
-                'repos' => 'CodeIgniter-develbar',
+                'repos' => 'codeigniter-develbar',
                 'name'  => 'CodeIgniter Developer Toolbar',
                 'dir'   => array('config','core', 'third_party','controllers'),
-                'msg'   => 'See https://github.com/relightings/CodeIgniter-develbar',
+                'msg'   => 'See https://github.com/relightings/codeigniter-develbar',
                 'example_branch' => 'master',
             ),
             'codeigniter-blade-engine' => array(

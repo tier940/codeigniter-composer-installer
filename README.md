@@ -96,7 +96,7 @@ $ php bin/install.php filename-checker master
 ```
 $ php bin/install.php restserver 3.0.4
 ```
-[CodeIgniter Developer Toolbar](https://github.com/relightings/CodeIgniter-develbar):
+[CodeIgniter Developer Toolbar](https://github.com/relightings/codeigniter-develbar):
 
 ```
 $ php bin/install.php codeigniter-develbar master
